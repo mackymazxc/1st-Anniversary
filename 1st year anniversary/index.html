@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Anniversary ❤️</title>
+  <meta name="description" content="An interactive, chic anniversary website." />
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#1a0f1d;
+      --card: rgba(255,255,255,.08);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --shadow: 0 20px 70px rgba(0,0,0,.55);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(155,123,255,.18), transparent 55%),
+        radial-gradient(1100px 650px at 80% 15%, rgba(255,106,162,.18), transparent 55%),
+        radial-gradient(1000px 650px at 50% 90%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* Layout */
+    .wrap{max-width:1120px;margin:0 auto;padding:22px 18px 86px;position:relative;z-index:10}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;
+      position:sticky;top:0;z-index:20;padding:10px 0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,16,32,.62), rgba(11,16,32,0));
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-weight:900;letter-spacing:.3px;
+      padding:10px 14px;border-radius:999px;background:var(--card);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
+    }
+    .brand small{display:block;font-weight:600;color:var(--muted);letter-spacing:0;font-size:11px;margin-top:2px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .btn{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(135deg, rgba(255,106,162,.22), rgba(155,123,255,.18));
+      color:var(--text);
+      padding:10px 14px;border-radius:999px;
+      transition:transform .12s ease, border .2s ease, filter .2s ease;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); filter:saturate(1.05)}
+    .btn:active{transform: translateY(0px) scale(.99)}
+    .btn.ghost{background: rgba(255,255,255,.06)}
+
+    .hero{
+      position:relative;
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      padding:34px 22px;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:
+        radial-gradient(520px 260px at 18% 22%, rgba(255,106,162,.23), transparent 62%),
+        radial-gradient(540px 300px at 82% 18%, rgba(155,123,255,.22), transparent 64%),
+        radial-gradient(680px 360px at 50% 110%, rgba(255,255,255,.08), transparent 60%);
+      opacity:.95;
+      pointer-events:none;
+    }
+
+    .heroInner{position:relative;display:grid;grid-template-columns: 1.2fr .8fr;gap:18px;align-items:stretch}
+    @media (max-width: 860px){ .heroInner{grid-template-columns: 1fr;} }
+
+    .hTitle{font-size: clamp(28px, 3.5vw, 46px);line-height:1.08;margin:0 0 10px}
+    .sub{margin:0 0 18px;color:var(--muted);font-size: clamp(14px, 1.6vw, 16px);max-width:70ch}
+
+    .badgeRow{display:flex;flex-wrap:wrap;gap:10px;margin: 10px 0 18px}
+    .badge{padding:9px 12px;border-radius:999px;background: rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.12);color: rgba(255,255,255,.85);font-size: 13px}
+
+    .card{border-radius:var(--radius);background: var(--card);border:1px solid rgba(255,255,255,.12);box-shadow: 0 12px 50px rgba(0,0,0,.28);backdrop-filter: blur(10px)}
+    .pad{padding:18px 18px}
+
+    .countCard{position:relative;padding:18px 16px;overflow:hidden}
+    .countCard:after{
+      content:"";position:absolute;inset:-1px;
+      background:
+        radial-gradient(300px 170px at 30% 30%, rgba(255,106,162,.18), transparent 60%),
+        radial-gradient(320px 200px at 75% 40%, rgba(155,123,255,.18), transparent 62%);
+      pointer-events:none;
+    }
+    .countInner{position:relative}
+    .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.16em}
+    .bigNum{font-size: 34px;font-weight:900;margin:8px 0 6px}
+    .grid4{display:grid;grid-template-columns: repeat(4, 1fr);gap:10px;margin-top:12px}
+    @media (max-width: 420px){ .grid4{grid-template-columns: repeat(2, 1fr)} }
+    .mini{padding:10px 10px;border-radius:16px;background: rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);text-align:center}
+    .mini .n{font-size:18px;font-weight:900}
+    .mini .t{font-size:11px;color:var(--muted);margin-top:2px}
+
+    section{margin-top:18px}
+    .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin: 26px 2px 12px}
+    .sectionTitle h2{margin:0;font-size:18px;letter-spacing:.3px}
+    .sectionTitle p{margin:0;color:var(--muted);font-size:13px}
+
+    /* Letter */
+    .letter{font-size:15px;line-height:1.75;color:rgba(255,255,255,.88)}
+    .letter strong{color:white}
+    .quote{margin:14px 0 0;padding:12px 14px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background: rgba(0,0,0,.18);color: rgba(255,255,255,.86);box-shadow: 0 12px 35px rgba(0,0,0,.2)}
+
+    /* Timeline */
+    .timeline{display:grid;gap:10px}
+    .step{display:grid;grid-template-columns: 98px 1fr;gap:12px;align-items:start;padding:14px 14px;border-radius:18px;background: rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);cursor:pointer;transition: transform .15s ease, border .2s ease}
+    .step:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18)}
+    .date{font-weight:900;font-size:12px;color: rgba(255,255,255,.88);padding:8px 10px;border-radius:14px;background: linear-gradient(135deg, rgba(255,106,162,.20), rgba(155,123,255,.16));border:1px solid rgba(255,255,255,.12);text-align:center}
+    .step h3{margin:2px 0 6px;font-size:14px}
+    .step p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+    .more{max-height:0;overflow:hidden;transition:max-height .35s ease;margin-top:0}
+    .step.open .more{max-height:220px;margin-top:8px}
+
+    /* Reveal */
+    .reveal{opacity:0;transform: translateY(18px);transition: opacity .7s ease, transform .7s ease;}
+    .reveal.show{opacity:1;transform: translateY(0)}
+
+    /* Typewriter caret */
+    .caret{display:inline-block;width:10px;margin-left:2px;opacity:.85;animation: caretBlink .85s step-end infinite;}
+    @keyframes caretBlink{50%{opacity:0}}
+
+    /* Floating hearts in hero */
+    .heart{position:absolute;width:10px;height:10px;transform: rotate(45deg);background: rgba(255,106,162,.65);border-radius:2px;box-shadow: 0 0 18px rgba(255,106,162,.25);pointer-events:none;animation: floatUp linear forwards;}
+    .heart:before,.heart:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background: rgba(255,106,162,.65)}
+    .heart:before{left:-5px;top:0}
+    .heart:after{left:0;top:-5px}
+    @keyframes floatUp{from{opacity:.0; transform: translateY(12px) rotate(45deg) scale(.9)}10%{opacity:.9}to{opacity:0; transform: translateY(-140px) rotate(45deg) scale(1.2)}}
+
+    /* Sticker photo layer */
+    #stickerLayer{position:fixed;inset:0;z-index:6;pointer-events:none;}
+    .sticker{
+      position:absolute;
+      width: clamp(120px, 16vw, 220px);
+      height: clamp(120px, 16vw, 220px);
+      border-radius: 22px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 20px 70px rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      transform: translate3d(0,0,0) rotate(var(--rot, -6deg));
+      pointer-events:auto;
+      user-select:none;
+      touch-action:none;
+    }
+    .sticker .tape{position:absolute;top:-10px;left:22px;right:22px;height:26px;border-radius:14px;background: rgba(255,255,255,.20);border: 1px solid rgba(255,255,255,.18);box-shadow: 0 10px 25px rgba(0,0,0,.25);transform: rotate(-2deg);opacity:.9;}
+    .sticker img{width:100%;height:100%;object-fit:cover;display:block;transform: scale(1.03);filter:saturate(1.06) contrast(1.02)}
+    .sticker .labelTag{position:absolute;left:10px;right:10px;bottom:10px;padding:8px 10px;border-radius:16px;background: rgba(0,0,0,.35);border: 1px solid rgba(255,255,255,.12);backdrop-filter: blur(12px);font-size: 12px;color: rgba(255,255,255,.90)}
+    .sticker .fallback{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      background:
+        radial-gradient(140px 110px at 30% 20%, rgba(255,106,162,.20), transparent 62%),
+        radial-gradient(160px 120px at 80% 30%, rgba(155,123,255,.18), transparent 64%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.10));
+      color: rgba(255,255,255,.85);
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    @keyframes stickerFloat{
+      0%{ transform: translate3d(0,0,0) rotate(var(--rot, -6deg)); }
+      50%{ transform: translate3d(var(--dx, 14px), var(--dy, -18px), 0) rotate(calc(var(--rot, -6deg) + 2deg)); }
+      100%{ transform: translate3d(0,0,0) rotate(var(--rot, -6deg)); }
+    }
+
+    /* Modal */
+    .modalBack{position:fixed; inset:0; background: rgba(0,0,0,.55);display:none; align-items:center; justify-content:center;padding:18px; z-index:50;}
+    .modal{width:min(720px, 100%);border-radius:24px;background: rgba(20,16,30,.92);border:1px solid rgba(255,255,255,.14);box-shadow: 0 25px 90px rgba(0,0,0,.62);padding:18px 18px 14px;backdrop-filter: blur(16px);}
+    .modal h3{margin:4px 0 8px}
+    .modal p{margin:0;color:rgba(255,255,255,.84);line-height:1.75}
+    .modal .row{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+    .modal .hint{color:var(--muted);font-size:12px}
+
+    /* Confetti hearts */
+    .confetti-heart{position:fixed;width:10px;height:10px;transform: rotate(45deg);background: rgba(255,106,162,.78);border-radius:2px;pointer-events:none;z-index:60;animation: confettiFall linear forwards;}
+    .confetti-heart:before,.confetti-heart:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background: rgba(255,106,162,.78)}
+    .confetti-heart:before{left:-5px;top:0}
+    .confetti-heart:after{left:0;top:-5px}
+    @keyframes confettiFall{from{opacity:0; transform: translateY(-20px) rotate(45deg) scale(.9)}10%{opacity:1}to{opacity:0; transform: translateY(110vh) rotate(45deg) scale(1.15)}}
+
+    /* Bouquet animation + sparkles */
+    #bouquet{animation: bouquetPop .8s cubic-bezier(.2,1.4,.2,1) both;}
+    @keyframes bouquetPop{
+      0%{ transform: translateY(14px) scale(.75) rotate(-2deg); opacity:0 }
+      55%{ transform: translateY(-6px) scale(1.05) rotate(1deg); opacity:1 }
+      75%{ transform: translateY(0px) scale(.98) rotate(0deg) }
+      100%{ transform: translateY(0px) scale(1) rotate(0deg) }
+    }
+    #bouquetWrap{position:relative;}
+    #sparkles{position:absolute; inset:0; pointer-events:none;}
+    .spark{
+      position:absolute;
+      font-size: clamp(18px, 3.4vw, 34px);
+      opacity:0;
+      transform: translate(-50%,-50%) scale(.7);
+      animation: sparkle 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,.35));
+    }
+    @keyframes sparkle{
+      0%{opacity:0; transform: translate(-50%,-50%) scale(.7) rotate(0deg)}
+      20%{opacity:1}
+      50%{opacity:.9; transform: translate(-50%,-50%) scale(1.05) rotate(6deg)}
+      80%{opacity:0}
+      100%{opacity:0; transform: translate(-50%,-50%) scale(.7) rotate(0deg)}
+    }
+
+    .burst-heart{
+      position:fixed;
+      width:12px;height:12px;
+      transform: rotate(45deg);
+      background: rgba(255,106,162,.85);
+      border-radius:2px;
+      pointer-events:none;
+      z-index:65;
+      box-shadow: 0 0 20px rgba(255,106,162,.25);
+    }
+    .burst-heart:before,.burst-heart:after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background: rgba(255,106,162,.85)}
+    .burst-heart:before{left:-6px;top:0}
+    .burst-heart:after{left:0;top:-6px}
+
+    /* Toast */
+    .toast{position:fixed; left:50%; bottom:18px; transform:translateX(-50%);background: rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.14);box-shadow: 0 18px 60px rgba(0,0,0,.4);color: rgba(255,255,255,.9);border-radius:999px;padding:10px 14px;font-size:12px;backdrop-filter: blur(10px);opacity:0; pointer-events:none;transition: opacity .25s ease, transform .25s ease;z-index:70;}
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-6px)}
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:12px}
+  </style>
+</head>
+
+<body>
+  <div id="stickerLayer" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span aria-hidden="true">💗</span>
+        <div>
+          <div id="siteTitle">Mack & Dorothy</div>
+          <small id="siteSub">January 16 — still choosing you</small>
+        </div>
+      </div>
+      <div class="actions">
+        
+        
+        <button class="btn" id="musicBtn">♫ Music: Off</button>
+        <button class="btn" id="surpriseBtn">Open Surprise 🎁</button>
+      </div>
+    </div>
+
+    <main class="hero reveal" id="hero">
+      <div class="heroInner">
+        <div>
+          <h1 class="hTitle" id="headline">Happy Anniversary ❤️</h1>
+          <p class="sub" id="subtitle">A small page for a love that survived the hard parts — and still chose each other.</p>
+
+          <div class="badgeRow">
+            <span class="badge">God-centered ✝️</span>
+            <span class="badge">Intentional love 💍</span>
+            <span class="badge">Still choosing you 🤍</span>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn" id="addHeartBtn">Tap for Hearts 💞</button>
+            <a class="btn" href="#letter" style="text-decoration:none">Read My Letter ✉️</a>
+            <a class="btn" href="#timeline" style="text-decoration:none">Our Story 🗓️</a>
+          </div>
+
+          <div style="margin-top:10px;color:var(--muted);font-size:12px">
+            
+          </div>
+        </div>
+
+        <div class="card countCard">
+          <div class="countInner">
+            <div class="label">Since our official date</div>
+            <div class="bigNum"><span id="daysOfficial">0</span> days</div>
+            <div class="label" style="margin-top:10px">Since: <span id="sinceText"></span></div>
+
+            <div class="grid4">
+              <div class="mini"><div class="n" id="years">0</div><div class="t">Years</div></div>
+              <div class="mini"><div class="n" id="months">0</div><div class="t">Months</div></div>
+              <div class="mini"><div class="n" id="weeks">0</div><div class="t">Weeks</div></div>
+              <div class="mini"><div class="n" id="hours">0</div><div class="t">Hours</div></div>
+            </div>
+
+            <div style="margin-top:12px">
+              <div class="label">Time together (minus the 1-month break)</div>
+              <div style="font-weight:900;font-size:18px;margin-top:6px">
+                <span id="daysTogether">0</span> days together
+              </div>
+              <div style="color:var(--muted);font-size:12px;margin-top:4px" id="breakNote">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section id="letter" class="reveal">
+      <div class="sectionTitle">
+        <h2>My Letter</h2>
+        <p>From my heart to yours.</p>
+      </div>
+      <div class="card pad">
+        <div class="letter" id="letterText">
+          <p><strong>My love,</strong></p>
+          <p>
+            January 16 will always mean something to me.
+            It was the day we chose each other — and even though our journey wasn’t perfect, even though we had that month where we weren’t together,
+            what moves my heart the most is this: <strong>we still found our way back.</strong>
+          </p>
+          <p>
+            That break didn’t erase what we have. It made me realize how deeply you matter to me.
+            It reminded me that what we’re building is not just comfort, not just feelings — it’s <strong>intentional</strong>. It’s chosen. It’s real.
+          </p>
+          <p>
+            We’ve had misunderstandings. We’ve had difficult moments. We’ve had times where we both had to face our own flaws.
+            But here’s what I know now: even when it’s hard… it feels easier because it’s you.
+          </p>
+          <div class="quote">I would rather grow through the hard parts with you, than have an easy love with someone else.</div>
+          <p>
+            I appreciate you more than I say — your patience, your heart, your effort, and the way you still try.
+            And if I’m being completely honest… that month without you made my heart understand something clearly:
+            I don’t want a life where you’re just a chapter. I want a life where <strong>you’re the story.</strong>
+          </p>
+          <p>
+            I’m not celebrating perfection today.
+            I’m celebrating resilience. Forgiveness. Growth. And us choosing each other again.
+            If I’m going to face life’s difficulties, I want to face them <strong>with you.</strong>
+          </p>
+          <p>
+            <strong>Happy Anniversary.</strong>
+            I love you — not just when it’s easy, but especially when it’s hard.
+            <br><strong>I’m still choosing you.</strong>
+          </p>
+          <p><strong>— Mack 🤍</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" id="timeline">
+      <div class="sectionTitle">
+        <h2>Our Story</h2>
+        <p>Tap each card to reveal the deeper part.</p>
+      </div>
+      <div class="card pad">
+        <div class="timeline">
+          <div class="step">
+            <div class="date">Jan 16</div>
+            <div>
+              <h3>We chose each other</h3>
+              <p>The start of “us.” Not perfect — but real.</p>
+              <div class="more">
+                <p style="margin:0;color:rgba(255,255,255,.82);font-size:12.5px;line-height:1.55">
+                  That day became a promise I still carry.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="date">The break</div>
+            <div>
+              <h3>A month that tested my heart</h3>
+              <p>It hurt — but it also showed me what mattered.</p>
+              <div class="more">
+                <p style="margin:0;color:rgba(255,255,255,.82);font-size:12.5px;line-height:1.55">
+                  Being without you didn’t make me feel free. It made me realize I wanted to do life with you.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="date">We returned</div>
+            <div>
+              <h3>We chose each other again</h3>
+              <p>Not because it was easy — because it was worth it.</p>
+              <div class="more">
+                <p style="margin:0;color:rgba(255,255,255,.82);font-size:12.5px;line-height:1.55">
+                  Coming back felt like saying: “I’m here. I’m not running.”
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="date">Today</div>
+            <div>
+              <h3>One year of love, growth, and resilience</h3>
+              <p>Still choosing you — still grateful.</p>
+              <div class="more">
+                <p style="margin:0;color:rgba(255,255,255,.82);font-size:12.5px;line-height:1.55">
+                  Even on our difficult days, it feels lighter because it’s you.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      Made with love ❤️ — <span id="footerLine">still choosing you.</span>
+    </footer>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="modalBack" id="modalBack" role="dialog" aria-modal="true" aria-label="Surprise bouquet">
+    <div class="modal" style="text-align:center">
+      <div id="bouquetWrap" style="display:flex;align-items:center;justify-content:center;">
+        <div id="bouquet" style="font-size:clamp(170px,42vw,360px); line-height:1; user-select:none; cursor:pointer; filter: drop-shadow(0 30px 80px rgba(0,0,0,.55));">💐</div>
+      </div>
+      <div id="sparkles" aria-hidden="true"></div>
+      <p style="margin:10px 0 0; color:rgba(255,255,255,.80)">Tap the bouquet to close</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script>
+    // =====================
+    // SETTINGS
+    // =====================
+    const COUPLE_NAMES = "Mack & Dorothy";
+    const OFFICIAL_START_DATE = "2025-01-16";
+    const BREAK_DAYS = 30;
+
+    const PHOTO_FILES = [
+      "photo1.jpg",
+      "photo2.jpg",
+      "photo3.jpg",
+      "photo4.jpg"
+    ];
+
+    const PHOTO_CAPTIONS = [
+      "Us.",
+      "My favorite view.",
+      "Safe.",
+      "Always choosing you."
+    ];
+
+    // =====================
+    // HELPERS
+    // =====================
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => document.querySelectorAll(s);
+    const clamp = (n,a,b)=>Math.max(a,Math.min(b,n));
+
+    // =====================
+    // BASIC TEXT SETUP
+    // =====================
+    $('#siteTitle').textContent = COUPLE_NAMES;
+
+    // =====================
+    // COUNTERS
+    // =====================
+    const start = new Date(OFFICIAL_START_DATE + "T00:00:00");
+    const now = new Date();
+    const daysOfficial = Math.max(Math.floor((now-start)/(1000*60*60*24)),0);
+    const daysTogether = Math.max(daysOfficial - BREAK_DAYS,0);
+
+    $('#daysOfficial').textContent = daysOfficial;
+    $('#daysTogether').textContent = daysTogether;
+    $('#hours').textContent = daysOfficial * 24;
+    $('#weeks').textContent = Math.floor(daysOfficial/7);
+    $('#months').textContent = Math.floor(daysOfficial/30);
+    $('#years').textContent = Math.floor(daysOfficial/365);
+    $('#sinceText').textContent = start.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+
+    // =====================
+    // REVEAL
+    // =====================
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('show');
+      });
+    },{threshold:0.12});
+    $$('.reveal').forEach(el=>io.observe(el));
+
+    // =====================
+    // HEARTS
+    // =====================
+    const hero = $('#hero');
+    function popHeart(x,y){
+      const h=document.createElement('div');
+      h.className='heart';
+      const size = 8 + Math.random()*14;
+      h.style.width = size + 'px';
+      h.style.height = size + 'px';
+      const r=hero.getBoundingClientRect();
+      h.style.left=(x-r.left)+'px';
+      h.style.top=(y-r.top)+'px';
+      h.style.animationDuration = (1.0 + Math.random()*1.2) + 's';
+      h.style.opacity = (0.35 + Math.random()*0.65).toFixed(2);
+      hero.appendChild(h);
+      setTimeout(()=>h.remove(),2200);
+    }
+
+    // Hearts button
+    $('#addHeartBtn').addEventListener('click', ()=>{
+      const r = hero.getBoundingClientRect();
+      for(let i=0;i<18;i++){
+        setTimeout(()=>{
+          popHeart(r.left + r.width*(0.15 + Math.random()*0.7), r.top + r.height*(0.25 + Math.random()*0.55));
+        }, i*45);
+      }
+    });
+
+    // Also pop a heart when you tap the hero card itself
+    hero.addEventListener('pointerdown', (e)=>{
+      popHeart(e.clientX, e.clientY);
+    });
+
+    // =====================
+    // TIMELINE TOGGLE
+    // =====================
+    $$('.step').forEach(step=>{
+      step.addEventListener('click',()=>step.classList.toggle('open'));
+    });
+
+    // =====================
+    // STICKERS
+    // =====================
+    const stickerLayer = document.getElementById('stickerLayer');
+
+    function makeDraggable(el){
+      let dragging=false, startX=0,startY=0,baseX=0,baseY=0;
+      el.addEventListener('mousedown',e=>{
+        dragging=true;
+        startX=e.clientX;
+        startY=e.clientY;
+        const rect=el.getBoundingClientRect();
+        baseX=rect.left;
+        baseY=rect.top;
+      });
+      window.addEventListener('mousemove',e=>{
+        if(!dragging) return;
+        const dx=e.clientX-startX;
+        const dy=e.clientY-startY;
+        el.style.left=(clamp(baseX+dx,0,window.innerWidth-120)/window.innerWidth*100)+'vw';
+        el.style.top=(clamp(baseY+dy,0,window.innerHeight-120)/window.innerHeight*100)+'vh';
+      });
+      window.addEventListener('mouseup',()=>dragging=false);
+    }
+
+    function createSticker(src,caption){
+      const s=document.createElement('div');
+      s.className='sticker';
+      s.style.left=(Math.random()*80)+'vw';
+      s.style.top=(Math.random()*70)+'vh';
+      s.style.setProperty('--rot',(Math.random()*14-7)+'deg');
+
+      const img=document.createElement('img');
+      img.src=src;
+      img.onerror=()=>{
+        img.style.display='none';
+      };
+
+      const fallback=document.createElement('div');
+      fallback.className='fallback';
+      fallback.textContent='Photo';
+
+      const tape=document.createElement('div');
+      tape.className='tape';
+
+      const tag=document.createElement('div');
+      tag.className='labelTag';
+      tag.textContent=caption;
+
+      s.appendChild(img);
+      s.appendChild(fallback);
+      s.appendChild(tape);
+      s.appendChild(tag);
+
+      makeDraggable(s);
+      return s;
+    }
+
+    PHOTO_FILES.forEach((file,i)=>{
+      stickerLayer.appendChild(createSticker(file,PHOTO_CAPTIONS[i]||'us'));
+    });
+
+    // =====================
+    // SURPRISE BOUQUET (pop + sparkles + heart burst)
+    // =====================
+    const modal = $('#modalBack');
+    const bouquet = $('#bouquet');
+    const sparkles = $('#sparkles');
+
+    function clearSparkles(){
+      if(!sparkles) return;
+      sparkles.innerHTML = '';
+    }
+
+    function placeSparkles(){
+      clearSparkles();
+      const positions = [
+        {x: 18, y: 22, d: 0.0},
+        {x: 80, y: 18, d: 0.2},
+        {x: 90, y: 50, d: 0.4},
+        {x: 74, y: 84, d: 0.1},
+        {x: 22, y: 86, d: 0.35},
+        {x: 8,  y: 55, d: 0.55}
+      ];
+      positions.forEach((p, idx)=>{
+        const s = document.createElement('div');
+        s.className = 'spark';
+        s.textContent = '✨';
+        s.style.left = p.x + '%';
+        s.style.top  = p.y + '%';
+        s.style.animationDelay = (p.d) + 's';
+        // small variation
+        s.style.transform = `translate(-50%,-50%) scale(${0.7 + (idx%3)*0.08})`;
+        sparkles.appendChild(s);
+      });
+    }
+
+    function confettiHearts(burst=34){
+      for(let i=0;i<burst;i++){
+        const c = document.createElement('div');
+        c.className = 'confetti-heart';
+        const size = 8 + Math.random()*12;
+        c.style.width = size + 'px';
+        c.style.height = size + 'px';
+        c.style.left = (Math.random()*100) + 'vw';
+        c.style.top = (-10 - Math.random()*30) + 'px';
+        c.style.opacity = (0.35 + Math.random()*0.65).toFixed(2);
+        c.style.animationDuration = (2.6 + Math.random()*1.9) + 's';
+        c.style.filter = `hue-rotate(${Math.floor(Math.random()*28)-12}deg)`;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(), 5400);
+      }
+    }
+
+    function heartBurst(cx, cy, n=18){
+      const r = 120;
+      for(let i=0;i<n;i++){
+        const a = (Math.PI*2) * (i/n) + (Math.random()*0.22);
+        const dist = r * (0.65 + Math.random()*0.55);
+        const x = cx + Math.cos(a) * dist;
+        const y = cy + Math.sin(a) * dist;
+        const h = document.createElement('div');
+        h.className = 'burst-heart';
+        const size = 10 + Math.random()*10;
+        h.style.width = size + 'px';
+        h.style.height = size + 'px';
+        h.style.left = cx + 'px';
+        h.style.top  = cy + 'px';
+        h.style.opacity = (0.6 + Math.random()*0.35).toFixed(2);
+        document.body.appendChild(h);
+
+        const dur = 520 + Math.random()*520;
+        const t0 = performance.now();
+        const sx = cx, sy = cy;
+        function anim(t){
+          const p = Math.min((t - t0)/dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const nx = sx + (x - sx) * eased;
+          const ny = sy + (y - sy) * eased;
+          h.style.left = nx + 'px';
+          h.style.top  = ny + 'px';
+          h.style.transform = `translate(-50%,-50%) rotate(45deg) scale(${1 - p*0.15})`;
+          h.style.opacity = String((1 - p) * 0.9);
+          if(p < 1) requestAnimationFrame(anim);
+          else h.remove();
+        }
+        requestAnimationFrame(anim);
+      }
+    }
+
+    // Open bouquet overlay
+    $('#surpriseBtn').addEventListener('click', ()=>{
+      modal.style.display = 'flex';
+      // restart bouquet pop animation
+      bouquet.style.animation = 'none';
+      bouquet.offsetHeight; // reflow
+      bouquet.style.animation = 'bouquetPop .8s cubic-bezier(.2,1.4,.2,1) both';
+      placeSparkles();
+      confettiHearts(42);
+    });
+
+    // Close ONLY when bouquet is clicked (and do a cute heart burst)
+    bouquet.addEventListener('click', (e)=>{
+      const rect = bouquet.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      heartBurst(cx, cy, 22);
+      modal.style.display = 'none';
+      clearSparkles();
+    });
+
+    // Clicking outside does nothing on purpose
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal){
+        // do nothing
+      }
+    });
+
+  </script>
+</body>
+</html>
